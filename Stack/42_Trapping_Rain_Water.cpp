@@ -1,5 +1,8 @@
 class Solution {
 public:
+Analysis Result
+// Time complexity: O(n). Each index is pushed onto the stack once and popped at most once, and each pair of i and stack pop is processed in O(1).
+// Space complexity: O(n) in the worst case, due to the stack storing indices of bars.
     int trap(vector<int>& height) {
         int water=0;
         stack<int>st;
