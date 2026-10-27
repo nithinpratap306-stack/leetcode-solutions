@@ -36,4 +36,5 @@ public:
 - Sorting: O(n log n) since each of the n elements is swapped once and heapify costs O(log n).
 Overall time complexity: O(n log n).
 Space complexity:
-- In-place algorithm with heapify using recursion. Recursion depth is O(log n) in the worst case, so auxiliary space is O(log n) due to the call stack. If tail recursion is optimized or implemented iteratively, it could be O(1) auxiliary space.*/
+- In-place algorithm with heapify using recursion. Recursion depth is O(log n) in the worst case, so auxiliary space is O(log n) due to the call stack.
+If tail recursion is optimized or implemented iteratively, it could be O(1) auxiliary space.*/
