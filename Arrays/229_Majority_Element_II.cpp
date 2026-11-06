@@ -1,18 +1,39 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        unordered_map<int,int>freq;
+        int cnt1=0,cnt2=0;
+        int el1=INT_MIN,el2=INT_MIN;
+        vector<int>ans;
+        int min=nums.size()/3;
+        
         for(int i: nums){
-            freq[i]++;
+            if(cnt1==0 && i!=el2){
+                el1=i;
+                cnt1=1;
+            }
+            else if(cnt2==0 && i!=el1){
+                el2=i;
+                cnt2=1;
+            }
+            else if(i==el1) cnt1++;
+            else if(i==el2) cnt2++;
+            else{
+                cnt1--;
+                cnt2--;
+            }
         }
-        int comp=nums.size()/3;
-        nums.clear();
-        for(const auto&[k,v]:freq){
-            if(v>comp) nums.push_back(k);
+        cnt1=0;
+        cnt2=0;
+
+        for(int i: nums){
+            if(el1==i) cnt1++;
+            if(el2==i) cnt2++;
         }
-        return nums;
+
+        if(cnt1>min) ans.push_back(el1);
+        if(cnt2>min) ans.push_back(el2);
+        return ans;
     }
 };
-/*Time complexity: O(n) on average, where n is the number of elements in nums. We iterate once to build the frequency map and then iterate over the map entries (at most n distinct keys), which is still O(n) on average.
-
-Space complexity: O(m), where m is the number of distinct elements in nums (in the worst case m = n). The frequency map stores counts for each distinct number. The result vector uses O(k) space where k is the number of elements that appear more than n/3 (0 or 1 or 2). Overall auxiliary space is O(m).*/
+/*Time complexity: O(n). The algorithm makes two linear passes over the input array: one to find potential candidates and one to verify them.
+Space complexity: O(1). It uses a constant number of extra variables (cnt1, cnt2, el1, el2, and a small result vector of at most two elements, but additional space is independent of n).*/
